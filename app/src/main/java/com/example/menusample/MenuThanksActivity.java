@@ -1,9 +1,11 @@
 package com.example.menusample;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,6 +27,11 @@ public class MenuThanksActivity extends AppCompatActivity {
         //TextViewに定食名と金額を表示
         tvMenuName.setText(menuName);
         tvMenuPrice.setText(menuPrice);
+
+        //アクションバーを取得
+        ActionBar actionBar = getSupportActionBar();
+        //アクションバーの[戻る]メニューを有効に設定
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     /**
@@ -32,5 +39,17 @@ public class MenuThanksActivity extends AppCompatActivity {
      */
     public void onBackButtonClick(View view) {
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //選択されたメニューのIDを取得
+        int itemId = item.getItemId();
+        //選択されたメニューが[戻る]の場合、アクティビティを終了
+        if(itemId == android.R.id.home) {
+            finish();
+        }
+        //親クラスの同名メソッドを呼び出し、その戻り値を返却
+        return super.onOptionsItemSelected(item);
     }
 }
